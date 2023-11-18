@@ -3,18 +3,21 @@ import DataTable from "../components/DataTable/DataTable";
 import { UpdatedUserData, UserData } from "../types/userData";
 import styles from "./styles.module.css";
 
+const PUBLIC_DATA_URL = 'https://assets.alippo.com/catalog/static/data.json'
+
 export default function Home() {
   const [data, setData] = useState<UpdatedUserData[]>([]);
   const [loading,setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch('https://assets.alippo.com/catalog/static/data.json')
+    fetch(PUBLIC_DATA_URL)
       .then(resp => resp.json())
       .then((fetchedData: UserData[]) => {
+        // adding unique id to each element
         const dataWithId: UpdatedUserData[] = fetchedData.map(item => ({
           ...item,
-          id: `${item.name || '-'}${item.pinCode}`, // adding unique id to each element
+          id: `${item.name || '-'}${item.pinCode}`, 
         }));
         setData(dataWithId);
         setLoading(false);

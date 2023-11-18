@@ -77,7 +77,7 @@ const TableItem = ({slno,user,handleDelete,handleEdit}: Props) => {
                 <Modal header={`Edit ${slno}`} closeModal={()=>setShowEditModal(false)}>
                     <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={styles.label} htmlFor="name">Name</label>
-                    <input className={styles.input} type="text" id="name" name="name" placeholder="Name" defaultValue={user.name || ''}/>
+                    <input autoFocus className={styles.input} type="text" id="name" name="name" placeholder="Name" defaultValue={user.name || ''}/>
 
                     <label className={styles.label} htmlFor="age">Age</label>
                     <input className={styles.input} type="number" id="age" name="age" placeholder="Age" defaultValue={user.age || 0}/>

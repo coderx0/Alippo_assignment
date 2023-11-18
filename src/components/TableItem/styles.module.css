@@ -12,6 +12,11 @@
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
+    background-color: rgb(169, 214, 231);
+}
+
+.button:last-of-type{
+    background-color: rgb(244, 199, 199);
 }
 
 .modal_action_container{
@@ -21,8 +26,6 @@
     margin-bottom: 20px;
     justify-content: flex-end;
 }
-
-
 
 .modal_action_button{
     border: none;
