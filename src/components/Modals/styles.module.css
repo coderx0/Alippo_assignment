@@ -17,6 +17,7 @@
     background-color: white;
     padding: 10px 30px;
     border-radius: 10px;
+    position: relative;
 }
 
 .modal_header{
@@ -62,3 +63,13 @@
       padding: 10px 20px;
     }
   }
+
+.close_button{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background-color: white;
+  font-size: 20px;
+  cursor: pointer;
+}

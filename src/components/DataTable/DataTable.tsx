@@ -3,6 +3,7 @@ import styles from "./styles.module.css"
 import sharedStyles from "../sharedStyles.module.css";
 import TableItem from '../TableItem/TableItem'
 import { UpdatedUserData, UserData } from '../../types/userData'
+import {toast} from 'sonner';
 
 interface Props{
     userData: UpdatedUserData[]
@@ -14,6 +15,7 @@ const DataTable = ({userData}: Props) => {
 
   const handleDelete = (id:string)=>{
     setData(prev=> prev.filter(data=>data.id !== id))
+    toast.success("Deleted Successfully!")
   }
 
   const handleEdit = ({id, newData}: {id: string, newData: UserData})=>{
@@ -25,6 +27,7 @@ const DataTable = ({userData}: Props) => {
         return item;
       })
     })
+    toast.success("Edited Successfully!")
   }
 
   return (

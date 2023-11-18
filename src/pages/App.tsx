@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DataTable from "../components/DataTable/DataTable";
 import { UpdatedUserData, UserData } from "../types/userData";
 import styles from "./styles.module.css";
+import {Toaster} from "sonner";
 
 const PUBLIC_DATA_URL = 'https://assets.alippo.com/catalog/static/data.json'
 
@@ -43,6 +44,7 @@ export default function Home() {
         data.length === 0 ? (<div>No data</div>):
         <DataTable userData={data}/>
       }
+      <Toaster richColors/>
     </main>
   );
 }
