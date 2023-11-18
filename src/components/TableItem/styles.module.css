@@ -39,7 +39,7 @@
 }
 
 .form{
-    width: 300px;
+    width: calc(100%);
 }
 
 .input {
