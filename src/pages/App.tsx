@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DataTable from "./components/DataTable/DataTable";
-import { UpdatedUserData, UserData } from "./types/userData";
+import DataTable from "../components/DataTable/DataTable";
+import { UpdatedUserData, UserData } from "../types/userData";
 import styles from "./styles.module.css";
 
 export default function Home() {

@@ -18,7 +18,7 @@ const Modal = ({header, closeModal,children}: Props) => {
 
   return createPortal(
     <div className={styles.modal} onClick={closeModal}>
-        <div className={styles.modal_container} onClick={e=>e.stopPropagation()}>
+        <div className={`${styles.modal_container} ${styles.slide_in_top}`} onClick={e=>e.stopPropagation()}>
         <h4 className={styles.modal_header}>{header}</h4>
         {children}
         </div>

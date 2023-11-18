@@ -18,6 +18,7 @@ const TableItem = ({slno,user,handleDelete,handleEdit}: Props) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
+        
         const formData = new FormData(e.target as HTMLFormElement);
         const name = formData.get('name') as string;
         const age = parseInt(formData.get('age') as string, 10) || null;

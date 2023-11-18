@@ -12,7 +12,6 @@ interface Props{
 const DataTable = ({userData}: Props) => {
   const [data,setData] = useState(userData);
 
-
   const handleDelete = (id:string)=>{
     setData(prev=> prev.filter(data=>data.id !== id))
   }
@@ -32,7 +31,7 @@ const DataTable = ({userData}: Props) => {
      <div className={styles.main_container}>
       <table className={styles.table_container}>
         <thead className={styles.table_head}>
-          <tr className={`${styles.table_row} ${styles.header}`}>
+          <tr className={`${styles.table_row} ${styles.row_header}`}>
           <th className={sharedStyles.column}>Sl. No</th>
           <th className={sharedStyles.column}>Name</th>
           <th className={sharedStyles.column}>Age</th>
