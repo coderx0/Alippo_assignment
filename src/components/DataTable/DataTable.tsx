@@ -12,6 +12,7 @@ interface Props{
 const DataTable = ({userData}: Props) => {
   const [data,setData] = useState(userData);
 
+
   const handleDelete = (id:string)=>{
     setData(prev=> prev.filter(data=>data.id !== id))
   }
@@ -45,12 +46,8 @@ const DataTable = ({userData}: Props) => {
         data.map((user,idx)=>(
           <tr key={user.id} className={styles.table_row}>
             <TableItem 
-              id={user.id} 
+              user={user}
               slno={idx} 
-              name={user.name} 
-              age={user.age} 
-              city={user.city} 
-              pinCode={user.pinCode}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               />

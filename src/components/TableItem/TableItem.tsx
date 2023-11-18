@@ -5,18 +5,14 @@ import sharedStyles from "../sharedStyles.module.css";
 import { UpdatedUserData, UserData } from '../../types/userData'
 import Modal from '../Modals/Modal';
 
-interface Props extends UpdatedUserData{
-    // id: string,
+interface Props{
+    user: UpdatedUserData
     slno: number,
-    // name: string | null,
-    // age: number | null,
-    // city: string | null,
-    // pincode: string | null,
     handleDelete: (id:string)=>void
     handleEdit: ({id, newData}:{id: string, newData: UserData})=>void
 }
 
-const TableItem = ({id,slno,name, age, city,pinCode,handleDelete,handleEdit}: Props) => {
+const TableItem = ({slno,user,handleDelete,handleEdit}: Props) => {
     const [showDeleteModal,setShowDeleteModal] = useState(false);
     const [showEditModal,setShowEditModal] = useState(false);
 
@@ -28,9 +24,8 @@ const TableItem = ({id,slno,name, age, city,pinCode,handleDelete,handleEdit}: Pr
         const city = formData.get('city') as string;
         const pinCode = formData.get('pinCode') as string;
 
-        console.log(age)
         const newData = {name,age,city,pinCode};
-        handleEdit({id, newData})
+        handleEdit({id: user.id, newData})
 
         setShowEditModal(false)
     }
@@ -40,16 +35,16 @@ const TableItem = ({id,slno,name, age, city,pinCode,handleDelete,handleEdit}: Pr
             {slno}
         </td>
         <td className={sharedStyles.column}>
-            {name || '-'}
+            {user.name || '-'}
         </td>
         <td className={sharedStyles.column}>
-            {age || '-'}
+            {user.age || '-'}
         </td>
         <td className={sharedStyles.column}>
-            {city || '-'}
+            {user.city || '-'}
         </td>
         <td className={sharedStyles.column}>
-            {pinCode || '-'}
+            {user.pinCode || '-'}
         </td>
         <td className={`${sharedStyles.column} ${styles.action_container}`}>
             <button className={styles.button} onClick={()=>setShowEditModal(true)}>
@@ -62,13 +57,13 @@ const TableItem = ({id,slno,name, age, city,pinCode,handleDelete,handleEdit}: Pr
 
         {
             showDeleteModal ? (
-                <Modal header={`Delete ${slno}`}>
+                <Modal header={`Delete ${slno}`} closeModal={()=>setShowDeleteModal(false)}>
                     <div className={styles.modal_action_container}>
                     <button className={styles.modal_action_button} onClick={()=>setShowDeleteModal(false)}>Cancel</button>
                     <button className={styles.modal_action_button}
                     onClick={()=>{
                         setShowDeleteModal(false)
-                        handleDelete(id);
+                        handleDelete(user.id);
                     }}
                     >Confirm</button>
                 </div>
@@ -78,24 +73,23 @@ const TableItem = ({id,slno,name, age, city,pinCode,handleDelete,handleEdit}: Pr
 
         {
             showEditModal ? (
-                <Modal header={`Edit ${slno}`}>
+                <Modal header={`Edit ${slno}`} closeModal={()=>setShowEditModal(false)}>
                     <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={styles.label} htmlFor="name">Name</label>
-                    <input className={styles.input} type="text" id="name" name="name" placeholder="Name.." defaultValue={name || ''}/>
+                    <input className={styles.input} type="text" id="name" name="name" placeholder="Name" defaultValue={user.name || ''}/>
 
                     <label className={styles.label} htmlFor="age">Age</label>
-                    <input className={styles.input} type="number" id="age" name="age" placeholder="Age" defaultValue={age || 0}/>
+                    <input className={styles.input} type="number" id="age" name="age" placeholder="Age" defaultValue={user.age || 0}/>
 
                     <label className={styles.label} htmlFor="city">City</label>
-                    <input className={styles.input} type="text" id="city" name="city" placeholder="City" defaultValue={city || ''}/>
+                    <input className={styles.input} type="text" id="city" name="city" placeholder="City" defaultValue={user.city || ''}/>
 
                     <label className={styles.label} htmlFor="pincode">Pincode</label>
-                    <input className={styles.input} type="text" id="pincode" name="pincode" placeholder="Pincode" defaultValue={pinCode || ''}/>
+                    <input className={styles.input} type="text" id="pincode" name="pincode" placeholder="Pincode" defaultValue={user.pinCode || ''}/>
                 
                 <div className={styles.modal_action_container}>
                     <button type='button' className={styles.modal_action_button} onClick={()=>setShowEditModal(false)}>Cancel</button>
-                    <button type='submit' className={styles.modal_action_button}
-                    >Confirm</button>
+                    <button type='submit' className={styles.modal_action_button}>Confirm</button>
                 </div>
                 </form>
                 </Modal>
