@@ -14,14 +14,23 @@ export default function Home() {
     setLoading(true);
     fetch(PUBLIC_DATA_URL)
       .then(resp => resp.json())
-      .then((fetchedData: UserData[]) => {
+      .then((fetchedData: UserData[] | null) => {
         // adding unique id to each element
-        const dataWithId: UpdatedUserData[] = fetchedData.map(item => ({
-          ...item,
-          id: `${item.name || '-'}${item.pinCode}`, 
-        }));
-        setData(dataWithId);
-        setLoading(false);
+        try {
+          if (fetchedData) {
+            const dataWithId: UpdatedUserData[] = fetchedData.map((item) => ({
+              ...item,
+              id: `${item.name || "-"}${item.pinCode}`,
+            }));
+            setData(dataWithId);
+          } else {
+            throw new Error("Some error happened");
+          }
+        } catch (error) {
+          console.error("Error processing data:", error);
+        } finally {
+          setLoading(false);
+        }
       })
       .catch(()=>{
         setLoading(false);
